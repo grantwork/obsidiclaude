@@ -29,7 +29,7 @@ export class StatusPanel {
    */
   mount(containerEl: HTMLElement): void {
     this.containerEl = containerEl;
-    this.createPanel();
+    this.#createPanel();
   }
 
   /**
@@ -63,7 +63,7 @@ export class StatusPanel {
     this.todoContainerEl = null;
     this.todoHeaderEl = null;
     this.todoContentEl = null;
-    this.createPanel();
+    this.#createPanel();
 
     // Re-render current state
     if (this.currentTodos && this.currentTodos.length > 0) {
@@ -74,7 +74,7 @@ export class StatusPanel {
   /**
    * Create the panel structure.
    */
-  private createPanel(): void {
+  #createPanel(): void {
     if (!this.containerEl) {
       return;
     }
@@ -92,11 +92,11 @@ export class StatusPanel {
     });
 
     // Store handler references for cleanup
-    this.todoClickHandler = () => this.toggleTodos();
+    this.todoClickHandler = () => this.#toggleTodos();
     this.todoKeydownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        this.toggleTodos();
+        this.#toggleTodos();
       }
     };
     this.todoHeaderEl.addEventListener('click', this.todoClickHandler);
@@ -108,7 +108,7 @@ export class StatusPanel {
     });
   }
 
-  private syncPanelVisibility(): void {
+  #syncPanelVisibility(): void {
     if (!this.panelEl) return;
 
     const hasTodos = (this.currentTodos?.length ?? 0) > 0;
@@ -133,12 +133,12 @@ export class StatusPanel {
       this.todoContainerEl.addClass('claudian-hidden');
       this.todoHeaderEl.empty();
       this.todoContentEl.empty();
-      this.syncPanelVisibility();
+      this.#syncPanelVisibility();
       return;
     }
 
     this.todoContainerEl.removeClass('claudian-hidden');
-    this.syncPanelVisibility();
+    this.#syncPanelVisibility();
 
     // Count completed and find current task
     const completedCount = todos.filter(t => t.status === 'completed').length;
@@ -146,13 +146,13 @@ export class StatusPanel {
     const currentTask = todos.find(t => t.status === 'in_progress');
 
     // Update header
-    this.renderTodoHeader(completedCount, totalCount, currentTask);
+    this.#renderTodoHeader(completedCount, totalCount, currentTask);
 
     // Update content
-    this.renderTodoContent(todos);
+    this.#renderTodoContent(todos);
 
     // Update ARIA
-    this.updateTodoAriaLabel(completedCount, totalCount);
+    this.#updateTodoAriaLabel(completedCount, totalCount);
 
     this.scrollToBottom();
   }
@@ -160,7 +160,7 @@ export class StatusPanel {
   /**
    * Render the todo collapsed header.
    */
-  private renderTodoHeader(completedCount: number, totalCount: number, currentTask: TodoItem | undefined): void {
+  #renderTodoHeader(completedCount: number, totalCount: number, currentTask: TodoItem | undefined): void {
     if (!this.todoHeaderEl) return;
 
     this.todoHeaderEl.empty();
@@ -196,7 +196,7 @@ export class StatusPanel {
   /**
    * Render the expanded todo content.
    */
-  private renderTodoContent(todos: TodoItem[]): void {
+  #renderTodoContent(todos: TodoItem[]): void {
     if (!this.todoContentEl) return;
     renderTodoItems(this.todoContentEl, todos);
   }
@@ -204,15 +204,15 @@ export class StatusPanel {
   /**
    * Toggle todo expanded/collapsed state.
    */
-  private toggleTodos(): void {
+  #toggleTodos(): void {
     this.isTodoExpanded = !this.isTodoExpanded;
-    this.updateTodoDisplay();
+    this.#updateTodoDisplay();
   }
 
   /**
    * Update todo display based on expanded state.
    */
-  private updateTodoDisplay(): void {
+  #updateTodoDisplay(): void {
     if (!this.todoContentEl || !this.todoHeaderEl) return;
 
     // Show/hide content
@@ -223,8 +223,8 @@ export class StatusPanel {
       const completedCount = this.currentTodos.filter(t => t.status === 'completed').length;
       const totalCount = this.currentTodos.length;
       const currentTask = this.currentTodos.find(t => t.status === 'in_progress');
-      this.renderTodoHeader(completedCount, totalCount, currentTask);
-      this.updateTodoAriaLabel(completedCount, totalCount);
+      this.#renderTodoHeader(completedCount, totalCount, currentTask);
+      this.#updateTodoAriaLabel(completedCount, totalCount);
     }
 
     this.scrollToBottom();
@@ -233,7 +233,7 @@ export class StatusPanel {
   /**
    * Update todo ARIA label.
    */
-  private updateTodoAriaLabel(completedCount: number, totalCount: number): void {
+  #updateTodoAriaLabel(completedCount: number, totalCount: number): void {
     if (!this.todoHeaderEl) return;
 
     const action = this.isTodoExpanded ? 'Collapse' : 'Expand';

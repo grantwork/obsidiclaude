@@ -246,7 +246,7 @@ export class ChatState {
 
   set thinkingIndicatorTimeout(value: number | null) {
     this.state.thinkingIndicatorTimeout = value;
-    this.thinkingIndicatorTimeoutWindow = value === null ? null : this.getDefaultTimerWindow();
+    this.thinkingIndicatorTimeoutWindow = value === null ? null : this.#getDefaultTimerWindow();
   }
 
   // ============================================
@@ -324,7 +324,7 @@ export class ChatState {
       };
     }
     if (!this.requiresAction) {
-      this.setAttention({ kind: 'action-required', since: Date.now() });
+      this.#setAttention({ kind: 'action-required', since: Date.now() });
     }
   }
 
@@ -333,7 +333,7 @@ export class ChatState {
     if (this.pendingActionIds.size === 0 && this.requiresAction) {
       const review = this.pendingReview;
       this.pendingReview = null;
-      this.setAttention(review === null
+      this.#setAttention(review === null
         ? null
         : { kind: 'review', ...review });
     }
@@ -342,7 +342,7 @@ export class ChatState {
   markReviewRequired(outcome: TabReviewOutcome = 'completed'): void {
     if (this.state.attention?.kind === 'review') {
       if (this.state.attention.outcome === 'error' || outcome === 'completed') return;
-      this.setAttention({
+      this.#setAttention({
         kind: 'review',
         outcome: 'error',
         since: this.state.attention.since,
@@ -357,20 +357,20 @@ export class ChatState {
       }
       return;
     }
-    this.setAttention({ kind: 'review', outcome, since: Date.now() });
+    this.#setAttention({ kind: 'review', outcome, since: Date.now() });
   }
 
   acknowledgeReview(): void {
     this.pendingReview = null;
     if (this.state.attention?.kind === 'review') {
-      this.setAttention(null);
+      this.#setAttention(null);
     }
   }
 
   clearAttention(): void {
     this.pendingActionIds.clear();
     this.pendingReview = null;
-    this.setAttention(null);
+    this.#setAttention(null);
   }
 
   // ============================================
@@ -407,7 +407,7 @@ export class ChatState {
 
   set flavorTimerInterval(value: number | null) {
     this.state.flavorTimerInterval = value;
-    this.flavorTimerIntervalWindow = value === null ? null : this.getDefaultTimerWindow();
+    this.flavorTimerIntervalWindow = value === null ? null : this.#getDefaultTimerWindow();
   }
 
   // ============================================
@@ -421,7 +421,7 @@ export class ChatState {
 
   clearThinkingIndicatorTimeout(fallbackWindow: Window | null = null): void {
     if (this.state.thinkingIndicatorTimeout) {
-      const ownerWindow = this.thinkingIndicatorTimeoutWindow ?? fallbackWindow ?? this.getDefaultTimerWindow();
+      const ownerWindow = this.thinkingIndicatorTimeoutWindow ?? fallbackWindow ?? this.#getDefaultTimerWindow();
       ownerWindow?.clearTimeout(this.state.thinkingIndicatorTimeout);
       this.state.thinkingIndicatorTimeout = null;
       this.thinkingIndicatorTimeoutWindow = null;
@@ -435,7 +435,7 @@ export class ChatState {
 
   clearFlavorTimerInterval(): void {
     if (this.state.flavorTimerInterval) {
-      const ownerWindow = this.flavorTimerIntervalWindow ?? this.getDefaultTimerWindow();
+      const ownerWindow = this.flavorTimerIntervalWindow ?? this.#getDefaultTimerWindow();
       ownerWindow?.clearInterval(this.state.flavorTimerInterval);
       this.state.flavorTimerInterval = null;
       this.flavorTimerIntervalWindow = null;
@@ -478,11 +478,11 @@ export class ChatState {
     return this.state.messages;
   }
 
-  private getDefaultTimerWindow(): Window | null {
+  #getDefaultTimerWindow(): Window | null {
     return typeof window === 'undefined' ? null : window;
   }
 
-  private setAttention(attention: TabAttention): void {
+  #setAttention(attention: TabAttention): void {
     const current = this.state.attention;
     if (
       current === attention
