@@ -1,9 +1,9 @@
 {
-  "id": "realclaudian",
-  "name": "Claudian",
+  "id": "obsidiclaude",
+  "name": "Obsidiclaude",
   "version": "2.2.7",
   "minAppVersion": "1.13.0",
-  "description": "Embeds Claude Code, Codex, and other coding agents as AI collaborators in your vault. Your vault becomes their working directory, giving them capabilities for file reads and writes, search, bash commands, and multi-step workflows.",
+  "description": "Grant's fork of Claudian. Embeds Claude Code, Codex, and other coding agents as AI collaborators in your vault. Your vault becomes their working directory, giving them capabilities for file reads and writes, search, bash commands, and multi-step workflows.",
   "author": "Yishen Tu",
   "authorUrl": "https://github.com/YishenTu",
   "isDesktopOnly": true
