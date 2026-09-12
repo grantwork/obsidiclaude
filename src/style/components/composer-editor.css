@@ -25,6 +25,7 @@
   padding: 8px 10px 10px;
   content: attr(data-placeholder);
   color: var(--text-muted);
+  opacity: 0.6;
 }
 
 .claudian-composer-editor .cm-editor {
@@ -49,6 +50,7 @@
 
 .claudian-composer-editor .cm-placeholder {
   color: var(--text-muted);
+  opacity: 0.6;
 }
 
 .claudian-composer-editor .cm-cursor {
