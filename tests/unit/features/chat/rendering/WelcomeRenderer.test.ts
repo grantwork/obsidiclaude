@@ -15,7 +15,7 @@ describe('Welcome', () => {
     expect(welcomeEl.children).toHaveLength(3);
     expect(welcomeEl.children[0].hasClass('claudian-welcome-brand')).toBe(true);
     expect(welcomeEl.children[0].hasClass('claudian-welcome-text')).toBe(true);
-    expect(welcomeEl.children[0].textContent).toBe('Claudian');
+    expect(welcomeEl.children[0].textContent).toBe('Obclaudian');
     expect(welcomeEl.children[1].hasClass('claudian-welcome-greeting')).toBe(true);
     expect(welcomeEl.children[1].hasClass('claudian-welcome-text')).toBe(true);
     expect(welcomeEl.children[1].textContent).toBe('Good morning');
@@ -41,7 +41,7 @@ describe('Welcome', () => {
     const welcomeEl = createWelcomeElement(parentEl);
 
     expect(welcomeEl.children).toHaveLength(2);
-    expect(welcomeEl.children[0].textContent).toBe('Claudian');
+    expect(welcomeEl.children[0].textContent).toBe('Obclaudian');
     expect(welcomeEl.children[1].hasClass('claudian-welcome-linked-content')).toBe(true);
   });
 });

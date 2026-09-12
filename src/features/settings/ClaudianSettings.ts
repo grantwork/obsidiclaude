@@ -104,7 +104,7 @@ function openHotkeySettings(app: App): void {
       return;
     }
 
-    searchEl.value = 'Claudian';
+    searchEl.value = 'Obclaudian';
     tab.updateHotkeyVisibility?.();
   }, 100);
 }
@@ -159,7 +159,7 @@ export class ClaudianSettingTab extends PluginSettingTab {
 
   getSettingDefinitions(): SettingDefinitionItem[] {
     return [{
-      name: 'Claudian',
+      name: 'Obclaudian',
       searchable: false,
       render: setting => this.renderSettings(setting.settingEl),
     }];

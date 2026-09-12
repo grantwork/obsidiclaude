@@ -117,7 +117,7 @@ describe('MessageRenderer', () => {
     expect(renderStoredSpy).toHaveBeenCalledTimes(1);
     expect(welcomeEl.hasClass('claudian-welcome')).toBe(true);
     expect(welcomeEl.children[0].hasClass('claudian-welcome-brand')).toBe(true);
-    expect(welcomeEl.children[0].textContent).toBe('Claudian');
+    expect(welcomeEl.children[0].textContent).toBe('Obclaudian');
     expect(welcomeEl.children[1].textContent).toBe('Hello');
   });
 

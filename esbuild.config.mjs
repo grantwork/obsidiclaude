@@ -142,7 +142,7 @@ function createPatchRendererUnsafeUnref(outputPaths) {
 // Obsidian plugin folder path (set via OBSIDIAN_VAULT env var or .env.local)
 const OBSIDIAN_VAULT = process.env.OBSIDIAN_VAULT;
 const OBSIDIAN_PLUGIN_PATH = OBSIDIAN_VAULT && existsSync(OBSIDIAN_VAULT)
-  ? path.join(OBSIDIAN_VAULT, '.obsidian', 'plugins', 'obsidiclaude')
+  ? path.join(OBSIDIAN_VAULT, '.obsidian', 'plugins', 'obclaudian')
   : null;
 
 // Plugin to copy built files to Obsidian plugin folder

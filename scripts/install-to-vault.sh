@@ -9,7 +9,7 @@ for f in main.js styles.css manifest.json; do
 done
 for VAULT in "$@"; do
   [ -d "$VAULT/.obsidian" ] || { echo "Not a vault: $VAULT" >&2; exit 1; }
-  DEST="$VAULT/.obsidian/plugins/obsidiclaude"
+  DEST="$VAULT/.obsidian/plugins/obclaudian"
   mkdir -p "$DEST"
   cp "$ROOT/main.js" "$ROOT/styles.css" "$ROOT/manifest.json" "$DEST/"
   echo "Installed to $DEST"

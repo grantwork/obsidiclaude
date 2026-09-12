@@ -1,6 +1,6 @@
 {
-  "id": "obsidiclaude",
-  "name": "Obsidiclaude",
+  "id": "obclaudian",
+  "name": "Obclaudian",
   "version": "2.2.7",
   "minAppVersion": "1.13.0",
   "description": "Grant's fork of Claudian. Embeds Claude Code, Codex, and other coding agents as AI collaborators in your vault. Your vault becomes their working directory, giving them capabilities for file reads and writes, search, bash commands, and multi-step workflows.",
