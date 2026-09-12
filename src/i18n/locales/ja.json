@@ -41,6 +41,10 @@
       "unavailableStreaming": "ストリーミング中は巻き戻しできません",
       "unavailableNoUuid": "巻き戻しできません：メッセージ識別子がありません"
     },
+    "speak": {
+      "ariaLabel": "読み上げる",
+      "stopAriaLabel": "読み上げを停止"
+    },
     "fork": {
       "ariaLabel": "会話を分岐",
       "chooseTarget": "会話を分岐",

@@ -41,6 +41,10 @@
       "unavailableStreaming": "스트리밍 중에는 되감기할 수 없습니다",
       "unavailableNoUuid": "되감기 불가: 메시지 식별자 누락"
     },
+    "speak": {
+      "ariaLabel": "소리내어 읽기",
+      "stopAriaLabel": "읽기 중지"
+    },
     "fork": {
       "ariaLabel": "대화 분기",
       "chooseTarget": "대화 분기",

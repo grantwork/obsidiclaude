@@ -41,6 +41,10 @@
       "unavailableStreaming": "串流回應中無法回退",
       "unavailableNoUuid": "無法回退：缺少訊息識別碼"
     },
+    "speak": {
+      "ariaLabel": "朗讀",
+      "stopAriaLabel": "停止朗讀"
+    },
     "fork": {
       "ariaLabel": "分叉對話",
       "chooseTarget": "分叉對話",

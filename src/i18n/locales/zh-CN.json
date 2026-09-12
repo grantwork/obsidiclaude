@@ -41,6 +41,10 @@
       "unavailableStreaming": "流式响应中无法回退",
       "unavailableNoUuid": "无法回退：缺少消息标识符"
     },
+    "speak": {
+      "ariaLabel": "朗读",
+      "stopAriaLabel": "停止朗读"
+    },
     "fork": {
       "ariaLabel": "分叉对话",
       "chooseTarget": "分叉对话",

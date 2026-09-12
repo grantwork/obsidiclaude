@@ -40,6 +40,7 @@ import {
   prepareDisplayOnlyCodeFences,
   restoreDisplayOnlyCodeFences,
 } from './DisplayOnlyCodeFences';
+import { isSpeechSynthesisSupported,SpeechPlaybackController } from './SpeechPlayback';
 import { resolveSubagentAdapter } from './subagentAdapterResolution';
 import {
   renderStoredAsyncSubagent,
@@ -76,6 +77,7 @@ export class MessageRenderer {
   private getCapabilities: () => ProviderCapabilities;
   private forkCallback?: (messageId: string) => Promise<void>;
   private liveMessageEls = new Map<string, HTMLElement>();
+  private readonly speechPlayback = new SpeechPlaybackController();
   private removeFileLinkHandler: () => void;
   private readonly imagePreviewModal = new ImagePreviewModal();
   private isDisposed = false;
@@ -122,6 +124,7 @@ export class MessageRenderer {
   dispose(): void {
     if (this.isDisposed) return;
     this.isDisposed = true;
+    this.speechPlayback.stop();
     this.imagePreviewModal.close();
     this.removeFileLinkHandler();
     this.removeFileLinkHandler = () => {};
@@ -447,6 +450,8 @@ export class MessageRenderer {
       blocks.filter(block => block.type === 'text').map(block => block.content).join('\n\n') || msg.content,
     ).content;
     if (copyText.trim()) this.addTextCopyButton(toolbar, copyText);
+    if (copyText.trim()) this.addSpeakButton(toolbar, copyText);
+    if (copyText.trim()) this.addSpeakButton(toolbar, copyText);
     if (this.forkCallback && msg.assistantMessageId) this.addForkButton(msgEl, msg.id);
     this.appendMessageTimestamp(msgEl, msg.role === 'user' ? msg.timestamp : msg.completedAt);
   }
@@ -1013,6 +1018,34 @@ export class MessageRenderer {
             }
           });
         });
+    });
+  }
+
+  private addSpeakButton(toolbar: HTMLElement, markdown: string): void {
+    if (!isSpeechSynthesisSupported()) return;
+    const btn = toolbar.createEl('button', {
+      cls: 'claudian-message-speak-btn',
+      attr: { type: 'button', 'aria-label': t('chat.speak.ariaLabel'), 'aria-pressed': 'false' },
+    });
+    setIcon(btn, 'volume-2');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.speechPlayback.toggle(btn, markdown, {
+        onStart: () => {
+          btn.empty();
+          setIcon(btn, 'square');
+          btn.classList.add('is-speaking');
+          btn.setAttribute('aria-label', t('chat.speak.stopAriaLabel'));
+          btn.setAttribute('aria-pressed', 'true');
+        },
+        onStop: () => {
+          btn.empty();
+          setIcon(btn, 'volume-2');
+          btn.classList.remove('is-speaking');
+          btn.setAttribute('aria-label', t('chat.speak.ariaLabel'));
+          btn.setAttribute('aria-pressed', 'false');
+        },
+      });
     });
   }
 

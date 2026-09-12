@@ -41,6 +41,10 @@
       "unavailableStreaming": "Cannot rewind while streaming",
       "unavailableNoUuid": "Cannot rewind: missing message identifiers"
     },
+    "speak": {
+      "ariaLabel": "Read aloud",
+      "stopAriaLabel": "Stop reading"
+    },
     "fork": {
       "ariaLabel": "Fork conversation",
       "chooseTarget": "Fork conversation",

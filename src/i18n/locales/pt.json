@@ -41,6 +41,10 @@
       "unavailableStreaming": "Não é possível retroceder durante a transmissão",
       "unavailableNoUuid": "Não é possível retroceder: identificadores de mensagem ausentes"
     },
+    "speak": {
+      "ariaLabel": "Ler em voz alta",
+      "stopAriaLabel": "Parar leitura"
+    },
     "fork": {
       "ariaLabel": "Bifurcar conversa",
       "chooseTarget": "Bifurcar conversa",

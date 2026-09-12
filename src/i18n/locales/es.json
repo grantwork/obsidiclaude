@@ -41,6 +41,10 @@
       "unavailableStreaming": "No se puede rebobinar durante la transmisión",
       "unavailableNoUuid": "No se puede rebobinar: faltan identificadores de mensaje"
     },
+    "speak": {
+      "ariaLabel": "Leer en voz alta",
+      "stopAriaLabel": "Detener lectura"
+    },
     "fork": {
       "ariaLabel": "Bifurcar conversación",
       "chooseTarget": "Bifurcar conversación",

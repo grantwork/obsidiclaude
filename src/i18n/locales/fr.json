@@ -41,6 +41,10 @@
       "unavailableStreaming": "Impossible de rembobiner pendant le streaming",
       "unavailableNoUuid": "Impossible de rembobiner : identifiants de message manquants"
     },
+    "speak": {
+      "ariaLabel": "Lire à haute voix",
+      "stopAriaLabel": "Arrêter la lecture"
+    },
     "fork": {
       "ariaLabel": "Bifurquer la conversation",
       "chooseTarget": "Bifurquer la conversation",

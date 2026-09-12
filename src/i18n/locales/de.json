@@ -41,6 +41,10 @@
       "unavailableStreaming": "Zurückspulen während des Streamings nicht möglich",
       "unavailableNoUuid": "Zurückspulen nicht möglich: Nachrichtenkennungen fehlen"
     },
+    "speak": {
+      "ariaLabel": "Vorlesen",
+      "stopAriaLabel": "Vorlesen stoppen"
+    },
     "fork": {
       "ariaLabel": "Konversation verzweigen",
       "chooseTarget": "Konversation verzweigen",
