@@ -62,6 +62,8 @@ export const CHAT_VIEW_PLACEMENTS = [
 /** Workspace location used when opening the Claudian chat view. */
 export type ChatViewPlacement = typeof CHAT_VIEW_PLACEMENTS[number];
 
+export type ReadAloudProvider = 'system' | 'openai';
+
 export const DUAL_PANE_SIDES = ['left', 'right'] as const;
 
 /** Side of the chat occupied by the session manager in dual-pane mode. */
@@ -180,6 +182,10 @@ export interface ClaudianSettings {
   maxWarmAgentProcesses: number;
   enableAutoScroll: boolean;
   showMessageTimestamps?: boolean;
+  readAloudProvider: ReadAloudProvider;
+  readAloudOpenAiVoice: string;
+  readAloudOpenAiModel: string;
+  readAloudOpenAiApiKey: string;
   deferMathRenderingDuringStreaming: boolean;
   expandFileEditsByDefault: boolean;
   chatViewPlacement: ChatViewPlacement;

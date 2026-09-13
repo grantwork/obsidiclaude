@@ -43,7 +43,8 @@
     },
     "speak": {
       "ariaLabel": "Ler em voz alta",
-      "stopAriaLabel": "Parar leitura"
+      "stopAriaLabel": "Parar leitura",
+      "failed": "Falha na leitura: {error}"
     },
     "fork": {
       "ariaLabel": "Bifurcar conversa",
@@ -647,6 +648,17 @@
     "enableAutoScroll": {
       "name": "Rolagem automática durante streaming",
       "desc": "Rolar automaticamente para baixo enquanto o Claude transmite respostas. Desativar para ficar no topo e ler desde o início."
+    },
+    "readAloud": {
+      "provider": {
+        "name": "Read aloud voice",
+        "desc": "Voice used by the speaker button on assistant messages. System voice runs on this device. OpenAI sends the message text to OpenAI and needs an API key.",
+        "system": "System voice (local)",
+        "openai": "OpenAI text-to-speech"
+      },
+      "voice": { "name": "OpenAI voice", "desc": "Voice preset for OpenAI text-to-speech." },
+      "model": { "name": "OpenAI speech model", "desc": "Leave blank for gpt-4o-mini-tts." },
+      "apiKey": { "name": "OpenAI API key", "desc": "Stored in this vault's plugin settings file. Leave blank to reuse OPENAI_API_KEY from your environment variables." }
     },
     "showMessageTimestamps": {
       "name": "Mostrar horários das mensagens",

@@ -162,7 +162,7 @@ describe('ConversationController', () => {
 
         const welcomeEl = deps.getWelcomeEl()!;
         expect(welcomeEl.querySelector('.claudian-welcome-brand')?.textContent)
-          .toBe('Claudian');
+          .toBe('Obclaudian');
         expect(welcomeEl.querySelector('.claudian-welcome-greeting')).not.toBeNull();
       });
 

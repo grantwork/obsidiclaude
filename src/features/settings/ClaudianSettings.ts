@@ -24,6 +24,7 @@ import {
   MAX_WARM_AGENT_PROCESSES,
   MIN_WARM_AGENT_PROCESSES,
 } from '../chat/execution/WarmExecutionPool';
+import { DEFAULT_OPENAI_TTS_MODEL, DEFAULT_OPENAI_TTS_VOICE, OPENAI_TTS_VOICES } from '../chat/rendering/SpeechPlayback';
 import type { FeatureHost } from '../FeatureHost';
 import { AgentSkillManagementCoordinator } from './AgentSkillManagementCoordinator';
 import { buildNavMappingText, parseNavMappings } from './keyboardNavigation';
@@ -447,6 +448,8 @@ export class ClaudianSettingTab extends PluginSettingTab {
             }
           })
       );
+
+    this.renderReadAloudSettings(container);
 
     new Setting(container)
       .setName(t('settings.deferMathRenderingDuringStreaming.name'))
@@ -1020,4 +1023,68 @@ export class ClaudianSettingTab extends PluginSettingTab {
       // Changes will apply when the next provider execution starts.
     }
   }
+
+  private renderReadAloudSettings(container: HTMLElement): void {
+    new Setting(container)
+      .setName(t('settings.readAloud.provider.name'))
+      .setDesc(t('settings.readAloud.provider.desc'))
+      .addDropdown((dropdown) => {
+        dropdown
+          .addOption('system', t('settings.readAloud.provider.system'))
+          .addOption('openai', t('settings.readAloud.provider.openai'))
+          .setValue(this.plugin.settings.readAloudProvider ?? 'system')
+          .onChange(async (value) => {
+            await this.plugin.mutateSettings((settings) => {
+              settings.readAloudProvider = value === 'openai' ? 'openai' : 'system';
+            });
+            this.update();
+          });
+      });
+
+    if (this.plugin.settings.readAloudProvider !== 'openai') return;
+
+    new Setting(container)
+      .setName(t('settings.readAloud.voice.name'))
+      .setDesc(t('settings.readAloud.voice.desc'))
+      .addDropdown((dropdown) => {
+        for (const voice of OPENAI_TTS_VOICES) dropdown.addOption(voice, voice);
+        dropdown
+          .setValue(this.plugin.settings.readAloudOpenAiVoice || DEFAULT_OPENAI_TTS_VOICE)
+          .onChange(async (value) => {
+            await this.plugin.mutateSettings((settings) => {
+              settings.readAloudOpenAiVoice = value;
+            });
+          });
+      });
+
+    new Setting(container)
+      .setName(t('settings.readAloud.model.name'))
+      .setDesc(t('settings.readAloud.model.desc'))
+      .addText((text) => {
+        text
+          .setPlaceholder(DEFAULT_OPENAI_TTS_MODEL)
+          .setValue(this.plugin.settings.readAloudOpenAiModel || '')
+          .onChange(async (value) => {
+            await this.plugin.mutateSettings((settings) => {
+              settings.readAloudOpenAiModel = value.trim();
+            });
+          });
+      });
+
+    new Setting(container)
+      .setName(t('settings.readAloud.apiKey.name'))
+      .setDesc(t('settings.readAloud.apiKey.desc'))
+      .addText((text) => {
+        text.inputEl.type = 'password';
+        text.inputEl.autocomplete = 'off';
+        text
+          .setValue(this.plugin.settings.readAloudOpenAiApiKey || '')
+          .onChange(async (value) => {
+            await this.plugin.mutateSettings((settings) => {
+              settings.readAloudOpenAiApiKey = value.trim();
+            });
+          });
+      });
+  }
+
 }

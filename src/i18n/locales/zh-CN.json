@@ -43,7 +43,8 @@
     },
     "speak": {
       "ariaLabel": "朗读",
-      "stopAriaLabel": "停止朗读"
+      "stopAriaLabel": "停止朗读",
+      "failed": "朗读失败：{error}"
     },
     "fork": {
       "ariaLabel": "分叉对话",
@@ -647,6 +648,17 @@
     "enableAutoScroll": {
       "name": "流式传输时自动滚动",
       "desc": "在 Claude 流式传输响应时自动滚动到底部。禁用后将停留在顶部，从头开始阅读。"
+    },
+    "readAloud": {
+      "provider": {
+        "name": "Read aloud voice",
+        "desc": "Voice used by the speaker button on assistant messages. System voice runs on this device. OpenAI sends the message text to OpenAI and needs an API key.",
+        "system": "System voice (local)",
+        "openai": "OpenAI text-to-speech"
+      },
+      "voice": { "name": "OpenAI voice", "desc": "Voice preset for OpenAI text-to-speech." },
+      "model": { "name": "OpenAI speech model", "desc": "Leave blank for gpt-4o-mini-tts." },
+      "apiKey": { "name": "OpenAI API key", "desc": "Stored in this vault's plugin settings file. Leave blank to reuse OPENAI_API_KEY from your environment variables." }
     },
     "showMessageTimestamps": {
       "name": "显示消息时间戳",
